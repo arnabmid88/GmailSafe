@@ -11,8 +11,8 @@ The goal of this project is to implement a https://docs.spring.io/spring-boot/do
 
 == Running the application without credentials
 
-. You need to enable the GMail API. In order to do it, access this website https://developers.google.com/gmail/api/quickstart/java and follow the instructions in `Step 1: Turn on the GMail API`. Write down `client_id` and `client_secret` or just download the `credentials.json` file. It contains the credentials that will be used on the next steps.
-
+. You need to enable the GMail API. In order to do it, access this website https://developers.google.com/gmail/api/quickstart/java and follow the instructions in `Step 1: Turn on the GMail API`. Download the `credentials.json` file. It contains the credentials that will be used on the next steps.
+. Copy the credentials.json file and paste it into src/main/resources folder
 . Open a terminal and inside `springboot-gmail` folder, run the following command
 +
 [source]
@@ -20,41 +20,13 @@ The goal of this project is to implement a https://docs.spring.io/spring-boot/do
 ./mvnw spring-boot:run
 ----
 
-. You need to get a `code` from Google. Open a browser and access the link below informing the `client_id` and the scope you allow the application to have.
-+
-WARNING: In the example below, we are using https://mail.google.com. It allows full access to the account! For more about scopes, please check https://developers.google.com/gmail/api/auth/scopes.
-+
-[source]
-----
-https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=CLIENT_ID&scope=https://mail.google.com&redirect_uri=http://localhost:8080/callback
-----
-
-. Choose the Google account and allow `GmailSafe` to access your Google Account. You will get the `code` in the response
-
-. Open a new terminal and run the following command, replacing `CODE`, `CLIENT_ID` and `CLIENT_SECRET` with the ones you got in the steps above.
-+
-[source]
-----
-curl -i -X POST https://www.googleapis.com/oauth2/v4/token \
-  -d "grant_type=authorization_code" \
-  -d "code=CODE" \
-  -d "client_id=CLIENT_ID" \
-  -d "client_secret=CLIENT_SECRET" \
-  -d "redirect_uri=http://localhost:8080/callback"
-----
-
-. Finally, set `client_id`, `client_secret` and `refresh_token` in the `application.yml` and restart the application.
-
-. **Done!** Once you have the credentials set in `application.yml` and they are valid, you don't need to do all those steps again.
-
-== Running the application with GMail credentials already set
-
-Open a new terminal and inside `springboot-gmail` folder run
+Access the following url to provide permission
 
 [source]
 ----
-./mvnw spring-boot:run
-----
+  https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=822661997257-jthda24kn4reomdq2delbufvd6qa7iec.apps.googleusercontent.com&redirect_uri=http://localhost:8888/Callback&response_type=code&scope=https://www.googleapis.com/auth/gmail.readonly
+----  
+
 == Running the jar (GMail credentials already set will return mail from my account)
 [source]
 ----
@@ -67,12 +39,11 @@ java -jar <location of the jar>/springboot-gmail-0.0.1-SNAPSHOT.jar
 Open the following location http://localhost:8080/swagger-ui.html
 ----
 
-== Some curl calls
+== Copy paste endpoints in browser (recommended for zip download endpoints)
 
 [source]
 ----
-curl -i http://localhost:8080/api/v1/backups
-curl -i http://localhost:8080/api/v1/backups/exports/{backupId}
-curl -i http://localhost:8080/api/v1/backups/exports/{backupId}/{label}
+http://localhost:8080/api/v1/backups/exports/{backupId}
+http://localhost:8080/api/v1/backups/exports/{backupId}/{label}
 ----
 
