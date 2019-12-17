@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: GmailSafe
+userid: me
+management:
+  endpoints:
+    web:
+      base-path: /
+      exposure.include: "*"
+  endpoint:
+    health:
+      show-details: always
