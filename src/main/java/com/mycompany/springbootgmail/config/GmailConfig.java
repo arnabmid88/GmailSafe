@@ -47,19 +47,6 @@ public class GmailConfig {
         return new Gmail.Builder(httpTransport(), JSON_FACTORY, getCredentials())
                 .setApplicationName(APPLICATION_NAME).build();
     }
-
-//    private Credential getCredentials() {
-//        BasicAuthentication auth = new BasicAuthentication(gmailProperties.getClientId(),
-//                gmailProperties.getClientSecret());
-//
-//        return new Credential.Builder(BearerToken.authorizationHeaderAccessMethod())
-//                .setJsonFactory(JacksonFactory.getDefaultInstance())
-//                .setTransport(httpTransport())
-//                .setClientAuthentication(auth)
-//                .setTokenServerEncodedUrl(gmailProperties.getTokenServerUrl())
-//                .build()
-//                .setRefreshToken(gmailProperties.getRefreshToken());
-//    }
     
     private Credential getCredentials() throws IOException {
     	System.out.println("Working Directory = " +

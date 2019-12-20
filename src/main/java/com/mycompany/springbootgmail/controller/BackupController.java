@@ -26,14 +26,12 @@ import com.mycompany.springbootgmail.util.FileHandlerUtil;
 public class BackupController {
 
 	private final GmailBackupService gmailBackupService;
-	private ResponseEntity responseEntity;
-
     public BackupController(GmailBackupService gmailBackupService) {
         this.gmailBackupService = gmailBackupService;
     }
     
     @PostMapping
-    public CreateBackupDto CreateBackup() throws IOException,FilePermissionException {
+    public CreateBackupDto createBackup() throws IOException,FilePermissionException {
     	CreateBackupDto dto = new CreateBackupDto();
     	String ts = String.valueOf(System.currentTimeMillis());
     	dto.setBackupId(ts);
@@ -52,7 +50,7 @@ public class BackupController {
     }
     
     @GetMapping
-    public List<RetrieveBackupDto> RetrieveBackup() throws IOException, FilePermissionException {    	
+    public List<RetrieveBackupDto> retrieveBackup() throws IOException, FilePermissionException {    	
     	try {
 			return gmailBackupService.retrieveBackupStatus();
 		} catch (FilePermissionException e) {
@@ -66,8 +64,8 @@ public class BackupController {
     }
     
     @GetMapping(path="/exports/{backupId}")
-    public ResponseEntity<Resource> RetrieveBackupById(@PathVariable("backupId") String backupId ) throws IOException, BackupNotExistsException {
-        
+    public ResponseEntity<Resource> retrieveBackupById(@PathVariable("backupId") String backupId ) throws IOException, BackupNotExistsException {
+    	ResponseEntity responseEntity;
     	try{
     		FileHandlerUtil fileUtil = new FileHandlerUtil();
             fileUtil.setBackupId(backupId);
@@ -96,8 +94,8 @@ public class BackupController {
     
     @GetMapping(path="/exports/{backupId}/{label}")
     
-    public ResponseEntity<Resource> RetrieveBackupByLabel(@PathVariable("backupId") String backupId, @PathVariable("label") String label) throws IOException, BackupNotExistsException {
-    	
+    public ResponseEntity<Resource> retrieveBackupByLabel(@PathVariable("backupId") String backupId, @PathVariable("label") String label) throws IOException, BackupNotExistsException {
+    	ResponseEntity responseEntity;
     	try{
     		FileHandlerUtil fileUtil = new FileHandlerUtil();
             fileUtil.setBackupId(backupId);

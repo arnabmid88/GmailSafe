@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface GmailBackupService {
 
-	public void startCreatingBackup(String backupId) throws IOException, FilePermissionException;
-	public List<RetrieveBackupDto> retrieveBackupStatus() throws FilePermissionException;
+	void startCreatingBackup(String backupId) throws IOException, FilePermissionException;
+	List<RetrieveBackupDto> retrieveBackupStatus() throws FilePermissionException;
 
 }

@@ -34,11 +34,6 @@ public class FileHandlerUtil {
 	private final String STATUS_FILE_NAME = "BackupStatus";
 	private String backupId;
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	public boolean createBackupDirectory(){
 		File file = new File(TEMP_DIR+DIRECTORY_NAME+File.separator+this.getBackupId());
 		

@@ -34,35 +34,13 @@ public class GmailMessageServiceImpl implements GmailMessageService {
                 .setQ(query).setLabelIds(labelIds).setMaxResults(30L).execute();
 
         List<Message> messages = new ArrayList<>();
-//        messages.addAll(response.getMessages());
         if (response.getMessages() != null) {
             messages.addAll(response.getMessages());
-//            if (response.getNextPageToken() != null) {
-//                String pageToken = response.getNextPageToken();
-//                response = gmail.users().messages().list(USER_ID).setQ(query)
-//                        .setPageToken(pageToken).execute();
-//            } else {
-//                break;
-//            }
         }
 
         return messages;
     }
 
-    @Override
-    public List<String> modifyMessageLabels(String messageId, List<String> labelsToAdd, List<String> labelsToRemove) throws IOException {
-        ModifyMessageRequest mods = new ModifyMessageRequest();
-        if (!StringUtils.isEmpty(labelsToAdd)) {
-            mods.setAddLabelIds(labelsToAdd);
-        }
-        if (!StringUtils.isEmpty(labelsToRemove)) {
-            mods.setRemoveLabelIds(labelsToRemove);
-        }
-
-        Message message = gmail.users().messages().modify(USER_ID, messageId, mods).execute();
-        return message.getLabelIds();
-    }
-    
     public static void main(String[] args) {
 		System.out.println(File.pathSeparator);
 	}
